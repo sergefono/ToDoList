@@ -8,3 +8,16 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.p-15 {
+  padding: 15px;
+}
+
+ul {
+  list-style: nome;
+  padding-top: 0px;
+}
+
+li {
+  padding: 15px;
+}
