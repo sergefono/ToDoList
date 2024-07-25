@@ -30,4 +30,10 @@ export class AppComponent {
       this.itemContent = '';
     }
   }
+
+  public switchItem($event: { srcIndex: number; dstIndex: number }): void {
+    const tmp = this.lists[0].items[$event.srcIndex];
+    this.lists[0].items[$event.srcIndex] = this.lists[0].items[$event.dstIndex];
+    this.lists[0].items[$event.dstIndex] = tmp;
+  }
 }

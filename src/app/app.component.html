@@ -24,7 +24,13 @@
     >
     <mat-card-content>
       <ul>
-        <li [class.odd]="odd" *ngFor="let item of list.items; let odd = odd">
+        <li
+          appDrag
+          [index]="index"
+          (switch)="switchItem($event)"
+          [class.odd]="odd"
+          *ngFor="let item of list.items; let odd = odd; let index = index"
+        >
           {{ item.content }}
         </li>
       </ul>
