@@ -31,9 +31,26 @@ export class AppComponent {
     }
   }
 
-  public switchItem($event: { srcIndex: number; dstIndex: number }): void {
-    const tmp = this.lists[0].items[$event.srcIndex];
-    this.lists[0].items[$event.srcIndex] = this.lists[0].items[$event.dstIndex];
-    this.lists[0].items[$event.dstIndex] = tmp;
+  public switchItem($event: {
+    src: {
+      itemIndex: number;
+      listIndex: number;
+    };
+    dst: {
+      itemIndex: number;
+      listIndex: number;
+    };
+  }): void {
+    [
+      this.lists[$event.src.listIndex].items[$event.src.itemIndex],
+      this.lists[$event.dst.listIndex].items[$event.dst.itemIndex],
+    ] = [
+      this.lists[$event.dst.listIndex].items[$event.dst.itemIndex],
+      this.lists[$event.src.listIndex].items[$event.src.itemIndex],
+    ];
+    /*  const tmp = this.lists[$event.src.listIndex].items[$event.src.itemIndex];
+    this.lists[$event.src.listIndex].items[$event.src.itemIndex] =
+      this.lists[$event.dst.listIndex].items[$event.dst.itemIndex];
+    this.lists[$event.dst.listIndex].items[$event.dst.itemIndex] = tmp; */
   }
 }

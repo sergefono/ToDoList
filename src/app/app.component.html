@@ -18,7 +18,7 @@
 </mat-toolbar>
 
 <div class="p-15" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px">
-  <mat-card *ngFor="let list of lists">
+  <mat-card *ngFor="let list of lists; let listIndex = index">
     <mat-card-header fxLayoutAlign="center center ">
       {{ list.label }}</mat-card-header
     >
@@ -26,10 +26,11 @@
       <ul>
         <li
           appDrag
-          [index]="index"
+          [itemIndex]="itemIndex"
+          [listIndex]="listIndex"
           (switch)="switchItem($event)"
           [class.odd]="odd"
-          *ngFor="let item of list.items; let odd = odd; let index = index"
+          *ngFor="let item of list.items; let odd = odd; let itemIndex = index"
         >
           {{ item.content }}
         </li>
