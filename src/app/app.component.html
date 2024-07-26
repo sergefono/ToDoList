@@ -19,7 +19,12 @@
 
 <div class="p-15" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px">
   <mat-card *ngFor="let list of lists; let listIndex = index">
-    <mat-card-header fxLayoutAlign="center center ">
+    <mat-card-header
+      appDrag
+      (transfer)="transferItem($event)"
+      [listIndex]="listIndex"
+      fxLayoutAlign="center center "
+    >
       {{ list.label }}</mat-card-header
     >
     <mat-card-content>

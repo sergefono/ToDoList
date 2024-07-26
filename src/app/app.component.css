@@ -5,3 +5,14 @@
 .over {
   background-color: #bdc3c7;
 }
+::ng-deep .mat-card-header {
+  padding: 15px;
+}
+
+li {
+  padding: 15px;
+}
+
+mat-card > .over {
+  background-color: #89b622;
+}

@@ -36,6 +36,17 @@ export class DragDirective {
     };
   }> = new EventEmitter();
 
+  @Output()
+  public transfer: EventEmitter<{
+    src: {
+      itemIndex: number;
+      listIndex: number;
+    };
+    dst: {
+      listIndex: number;
+    };
+  }> = new EventEmitter();
+
   /*définir des données dragguées au cours d'une opération de drag 
   and drop afin de passer l’index entre les éléments de la liste*/
   @HostListener('dragstart', ['$event'])
@@ -66,16 +77,28 @@ export class DragDirective {
   @HostListener('drop', ['$event'])
   public drop($event: DragEvent) {
     this.isIn = false;
-    this.switch.emit({
-      src: {
-        itemIndex: Number($event.dataTransfer?.getData('itemIndex')),
-        listIndex: Number($event.dataTransfer?.getData('listIndex')),
-      },
-      dst: {
-        itemIndex: this.itemIndex,
-        listIndex: this.listIndex,
-      },
-    });
+    if (this.itemIndex) {
+      this.switch.emit({
+        src: {
+          itemIndex: Number($event.dataTransfer?.getData('itemIndex')),
+          listIndex: Number($event.dataTransfer?.getData('listIndex')),
+        },
+        dst: {
+          itemIndex: this.itemIndex,
+          listIndex: this.listIndex,
+        },
+      });
+    } else {
+      this.transfer.emit({
+        src: {
+          itemIndex: Number($event.dataTransfer?.getData('itemIndex')),
+          listIndex: Number($event.dataTransfer?.getData('listIndex')),
+        },
+        dst: {
+          listIndex: this.listIndex,
+        },
+      });
+    }
   }
 
   constructor() {}
